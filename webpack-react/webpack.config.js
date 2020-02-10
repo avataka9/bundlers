@@ -6,13 +6,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = function (env, argv) {
 	const isDev = argv.mode === 'development';
 	return {
+		//context: path.resolve(__dirname, './src'),
+        mode: isDev ? 'development' : 'production',
 		entry: {
 			app: './src/app.tsx',
 		},
 		output: {
 			filename: './js/[name].bundle.js',
 			path: path.resolve(__dirname, 'dist'),
-			publicPath: '/'
+			//publicPath: '/'
 		},
 		module: {
 			rules: [
@@ -36,23 +38,23 @@ module.exports = function (env, argv) {
 		},
 		plugins: [
 			new MiniCssExtractPlugin({
-        filename: 'css/[name].css',
-        chunkFilename: '[id].css',
+				filename: 'css/[name].css',
+				chunkFilename: '[id].css',
 			}),
-      //new CleanWebpackPlugin(),
-      new webpack.ProgressPlugin(),
-      new HtmlWebpackPlugin({template: './src/index.html'})
+			//new CleanWebpackPlugin(),
+			new webpack.ProgressPlugin(),
+			new HtmlWebpackPlugin({template: './src/index.html'})
 		],
 		devtool: isDev ? 'source-map' : false,
 		devServer: {
 			contentBase: '.dist'
-    },
-    resolve: {
-      extensions: [
-        '.tsx',
-        '.ts'
-      ],
-      alias: {}
-    }
+		},
+		resolve: {
+			extensions: [
+				'.tsx',
+				'.ts'
+			],
+			alias: {}
+		}
 	}
 };
