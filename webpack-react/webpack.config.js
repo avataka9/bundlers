@@ -26,6 +26,10 @@ module.exports = function (env, argv) {
 					]
 				},
 				{
+					test: /\.(png|jpe?g|gif)$/i,
+					loader: 'file-loader',
+				},
+				{
 					test: /\.s[ac]ss$/i,
 					exclude: /node_modules/,
 					use: [
@@ -52,7 +56,8 @@ module.exports = function (env, argv) {
 		resolve: {
 			extensions: [
 				'.tsx',
-				'.ts'
+				'.ts',
+				'.js'
 			],
 			alias: {}
 		}
